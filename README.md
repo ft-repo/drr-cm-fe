@@ -1,7 +1,7 @@
 # DRR-CM-FE - How to ใช้งานเบื้องต้น
 1. copy คำสั่งใส่ CLI หรือ tools ที่เกี่ยวข้อง
    ```
-   [git clone https://github.com/ft-repo/tps-fe.git](https://github.com/ft-repo/drr-cm-fe.git)
+   git clone https://github.com/ft-repo/drr-cm-fe.git
    ```
 2. เข้าใจหลักการทำงาน branch ต่างๆ ใน repository
    - main = ไม่ต้องยุ่ง ปล่อยได้เลย ปกติเอาไว้ merge code ที่สมบูรณ์แล้วเท่านั้น
