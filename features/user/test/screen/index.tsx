@@ -8,7 +8,7 @@ const TestScreen: React.FC<Props> = (props) => {
   const { } = props
 
   return (
-    <div>454545</div>
+    <div>index</div>
   )
 }
 

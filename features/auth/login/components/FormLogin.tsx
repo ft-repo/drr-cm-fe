@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import DPT_LOGO from '@/public/image/dpt-logo.png'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { setCredential } from '@/store/features/authSlice';
+import { setLoading } from '@/store/features/layoutSlice';
 
 interface Props {
 
@@ -23,9 +24,7 @@ const FormLogin: React.FC<Props> = (props) => {
   const [modal, contextHolder] = Modal.useModal()
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const { credential } = useAppSelector(state => state.auth)
-
-  console.log('===', credential)
+  const { loading } = useAppSelector(state => state.layout)
 
   const form = useForm<FieldType>({
     defaultValues: {
@@ -37,12 +36,14 @@ const FormLogin: React.FC<Props> = (props) => {
   const { handleSubmit, control, formState: { errors } } = form
 
   const onSubmit = useCallback(async (value: FieldType) => {
+    dispatch(setLoading(true))
     try {
       // SETUP REDUX
       await dispatch(setCredential({
         credential: {
           username: value.username,
-          role: 'ADMIN'
+          role: 'ADMIN',
+          access_token: '1A2B3C4D5E6F'
         }
       }))
       // RETURN SUCCESS
@@ -63,6 +64,8 @@ const FormLogin: React.FC<Props> = (props) => {
       } else {
         console.error(error)
       }
+    } finally {
+      dispatch(setLoading(false))
     }
   }, [modal, router, dispatch])
 
@@ -139,6 +142,7 @@ const FormLogin: React.FC<Props> = (props) => {
               />
               <div className='mt-5'>
                 <Button
+                  loading={loading}
                   block
                   htmlType='submit'
                   type='primary'
