@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -7,6 +7,9 @@ import { Avatar, Button, Dropdown, type MenuProps, Modal } from 'antd';
 import { theme } from 'antd';
 import { FaArrowRightFromBracket, FaRegUser } from 'react-icons/fa6';
 import { useRouter } from 'next/router';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { ROLE } from '@/constants';
+import { resetCredential } from '@/store/features/authSlice';
 
 interface Props {
   collapsed: boolean;
@@ -21,6 +24,26 @@ const Header: React.FC<Props> = (props) => {
   } = theme.useToken();
   const [modal, contextHolder] = Modal.useModal()
   const router = useRouter()
+  const { username, role } = useAppSelector(state => state.auth.credential)
+  const dispatch = useAppDispatch()
+
+  const signout = useCallback(async () => {
+    try {
+      await dispatch(resetCredential())
+      await router.replace('/auth/login')
+    } catch (error) {
+      if (error instanceof Error) {
+        modal.error({
+          title: 'ผิดพลาด',
+          content: `ไม่สามารถดำเนินการต่อได้`,
+          okText: 'ยืนยัน',
+          onOk: () => Modal.destroyAll()
+        })
+      } else {
+        console.error(error)
+      }
+    }
+  }, [dispatch, router, modal])
 
   const items: MenuProps['items'] = [
     {
@@ -38,7 +61,7 @@ const Header: React.FC<Props> = (props) => {
           content: 'คุณต้องการออกจากระบบหรือไม่',
           okText: 'ออกจากระบบ',
           cancelText: 'ยกเลิก',
-          onOk: () => router.replace('/auth/login'),
+          onOk: () => signout(),
           onCancel: () => Modal.destroyAll()
         })
       }
@@ -75,8 +98,8 @@ const Header: React.FC<Props> = (props) => {
             }}
           />
           <div>
-            <h5 className='text-black'><strong>USERNAME</strong></h5>
-            <p className='text-black font-light'>ADMIN</p>
+            <h5 className='text-black'><strong>{username || 'USERNAME'}</strong></h5>
+            <p className='text-black font-light'>{ROLE[role as 'ADMIN' | 'USER'] || 'ROLE'}</p>
           </div>
         </div>
       </Dropdown>

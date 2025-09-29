@@ -4,6 +4,8 @@ import { Button, Input, Modal } from 'antd';
 import { Controller, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router';
 import DPT_LOGO from '@/public/image/dpt-logo.png'
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { setCredential } from '@/store/features/authSlice';
 
 interface Props {
 
@@ -20,6 +22,10 @@ const FormLogin: React.FC<Props> = (props) => {
   const { } = props
   const [modal, contextHolder] = Modal.useModal()
   const router = useRouter()
+  const dispatch = useAppDispatch()
+  const { credential } = useAppSelector(state => state.auth)
+
+  console.log('===', credential)
 
   const form = useForm<FieldType>({
     defaultValues: {
@@ -30,14 +36,35 @@ const FormLogin: React.FC<Props> = (props) => {
 
   const { handleSubmit, control, formState: { errors } } = form
 
-  const onSubmit = useCallback((value: FieldType) => {
-    modal.success({
-      title: 'เข้าสู่ระบบสำเร็จ',
-      content: `ชื่อผู้ใช้งาน: ${value.username}`,
-      okText: 'ยืนยัน',
-      onOk: () => router.replace('/user/test')
-    })
-  }, [modal, router])
+  const onSubmit = useCallback(async (value: FieldType) => {
+    try {
+      // SETUP REDUX
+      await dispatch(setCredential({
+        credential: {
+          username: value.username,
+          role: 'ADMIN'
+        }
+      }))
+      // RETURN SUCCESS
+      await modal.success({
+        title: 'เข้าสู่ระบบสำเร็จ',
+        content: `ชื่อผู้ใช้งาน: ${value.username}`,
+        okText: 'ยืนยัน',
+        onOk: () => router.replace('/user/test')
+      })
+    } catch (error) {
+      if (error instanceof Error) {
+        modal.error({
+          title: 'ไม่สามารถเข้าสู้ระบบได้',
+          content: `กรุณากรอกรายละเอียดอีกครั้ง`,
+          okText: 'ยืนยัน',
+          onOk: () => Modal.destroyAll()
+        })
+      } else {
+        console.error(error)
+      }
+    }
+  }, [modal, router, dispatch])
 
   return (
     <>
