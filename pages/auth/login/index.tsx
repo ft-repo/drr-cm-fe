@@ -6,7 +6,7 @@ interface Props {
 
 }
 
-const LoginPage: React.FC<Props> = (props) => {
+const LoginIndex: React.FC<Props> = (props) => {
   const { } = props
 
   return (
@@ -22,4 +22,4 @@ const LoginPage: React.FC<Props> = (props) => {
   )
 }
 
-export default React.memo<Props>(LoginPage)
+export default React.memo<Props>(LoginIndex)

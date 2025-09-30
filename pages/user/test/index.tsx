@@ -3,21 +3,23 @@ import React from 'react'
 import TestScreen from '@/features/user/test/screen'
 import { wrapper } from '@/lib/store'
 import { SessionData, sessionOptions } from '@/lib/ironSession'
-import { setCredential } from '@/store/features/authSlice'
+import { AuthState, setCredential } from '@/store/features/authSlice'
 import { getIronSession } from 'iron-session'
 import { checkAuth, redirectToLogin, sessionToProps } from '@/utils/checkAuth'
 import { GetServerSideProps } from 'next'
 import type { PageProps, Redirect } from '@/types/page'
 
 interface Props {
-
+  user: AuthState;
 }
 
 const TestPage: React.FC<Props> = (props) => {
-  const { } = props
+  const { user } = props
 
   return (
-    <Layout>
+    <Layout
+      credential={user.credential}
+    >
       <TestScreen />
     </Layout>
   )

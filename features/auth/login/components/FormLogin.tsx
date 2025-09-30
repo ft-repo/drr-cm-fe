@@ -12,12 +12,10 @@ interface Props {
 
 }
 
-
 interface FieldType {
   username: string;
   password: string;
 }
-
 
 const FormLogin: React.FC<Props> = (props) => {
   const { } = props
@@ -64,9 +62,15 @@ const FormLogin: React.FC<Props> = (props) => {
           okText: 'ยืนยัน',
           onOk: () => router.replace('/user/test')
         })
+      } else {
+        modal.error({
+          title: 'ไม่สามารถเข้าสู้ระบบได้',
+          content: response.response || 'Internal Server Error',
+          okText: 'ยืนยัน',
+          onOk: () => Modal.destroyAll()
+        })
       }
     } catch (error) {
-      console.log(error)
       if (error instanceof Error) {
         modal.error({
           title: 'ไม่สามารถเข้าสู้ระบบได้',

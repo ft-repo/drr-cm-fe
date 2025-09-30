@@ -1,12 +1,5 @@
-import { MenuItemType } from "antd/es/menu/interface"
+import { MenuProps } from "antd"
 
-const user: MenuItemType[] = [
-  {
-    key: '1',
-    label: 'test',
-    title: 'test',
-    icon: ''
-  }
-]
+const user: MenuProps['items'] = []
 
 export default user

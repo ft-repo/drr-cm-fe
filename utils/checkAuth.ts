@@ -1,6 +1,6 @@
 import { AuthState } from "@/store/features/authSlice"
 
-export const checkAuth = (token?: string | null, role?: 'ADMIN' | 'USER') => {
+export const checkAuth = (token?: string | null, role?: 'ADMIN' | 'USER' | 'DEVELOPER') => {
   let valid = false
   if (token && role) {
     valid = true
