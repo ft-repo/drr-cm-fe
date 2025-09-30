@@ -1,12 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { auth, layout } from '@/store'
 import { createWrapper } from 'next-redux-wrapper'
+import {
+  auth,
+  layout,
+  // {{import}}
+} from '@/store'
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       auth: auth,
-      layout: layout
+      layout: layout,
+      // {{export}}
     },
   })
 }

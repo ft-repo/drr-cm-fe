@@ -24,6 +24,7 @@ import {
   FaPlug
 } from "react-icons/fa6";
 import { useAppSelector } from '@/lib/hooks';
+import { useRouter } from 'next/router';
 
 interface Props {
 }
@@ -52,6 +53,7 @@ const ICON_LIST: any = {
 const Side: React.FC<Props> = (props) => {
   const { } = props
   const { role } = useAppSelector(state => state.auth.credential)
+  const router = useRouter()
 
   const Icon = useCallback((iconName: any, { ...props }) => {
     const IconResult = ICON_LIST[iconName]
@@ -65,11 +67,11 @@ const Side: React.FC<Props> = (props) => {
     if (!menu[role as keyof typeof menu]) return []
 
     return menu[role].map((item: MenuItemProps) => {
-      console.log(menu[role].find(item => item))
       if (!item.children) {
         return {
           ...item,
           icon: Icon(item.icon, {}),
+          onClick: (e) => router.push(menu[role].find((item: MenuItemProps) => item.key === e.key).pathname)
         }
       }
       // RETURN
@@ -79,7 +81,7 @@ const Side: React.FC<Props> = (props) => {
         children: []
       }
     })
-  }, [Icon, role])
+  }, [Icon, role, router])
 
   return (
     <>
