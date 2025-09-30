@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+export type Credential = {
+  username: string;
+  role: string;
+  access_token: string;
+}
+
 export type AuthState = {
-  credential: {
-    username: string;
-    role: string;
-    access_token: string;
-  }
+  credential: Credential;
 }
 
 const initialState: AuthState = {

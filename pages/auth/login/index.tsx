@@ -1,6 +1,5 @@
 import React from 'react'
 import LoginScreen from '@/features/auth/login/screen'
-
 import { ConfigProvider } from 'antd'
 
 interface Props {

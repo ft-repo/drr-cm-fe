@@ -38,22 +38,35 @@ const FormLogin: React.FC<Props> = (props) => {
   const onSubmit = useCallback(async (value: FieldType) => {
     dispatch(setLoading(true))
     try {
-      // SETUP REDUX
-      await dispatch(setCredential({
-        credential: {
-          username: value.username,
-          role: 'ADMIN',
-          access_token: '1A2B3C4D5E6F'
-        }
-      }))
-      // RETURN SUCCESS
-      await modal.success({
-        title: 'เข้าสู่ระบบสำเร็จ',
-        content: `ชื่อผู้ใช้งาน: ${value.username}`,
-        okText: 'ยืนยัน',
-        onOk: () => router.replace('/user/test')
+      // CREATE API REQUEST
+      const api = await fetch('/api/auth/login', {
+        method: 'POST',
+        body: JSON.stringify(value),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
+      // CHECK RESPONSE
+      const response = await api.json()
+      if (response.success) {
+        // SETUP REDUX
+        await dispatch(setCredential({
+          credential: {
+            username: response.response.username,
+            role: response.response.role,
+            access_token: response.response.access_token
+          }
+        }))
+        // RETURN SUCCESS
+        await modal.success({
+          title: 'เข้าสู่ระบบสำเร็จ',
+          content: `ชื่อผู้ใช้งาน: ${value.username}`,
+          okText: 'ยืนยัน',
+          onOk: () => router.replace('/user/test')
+        })
+      }
     } catch (error) {
+      console.log(error)
       if (error instanceof Error) {
         modal.error({
           title: 'ไม่สามารถเข้าสู้ระบบได้',

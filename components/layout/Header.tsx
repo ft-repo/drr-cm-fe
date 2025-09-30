@@ -6,7 +6,6 @@ import {
 import { Avatar, Button, Dropdown, type MenuProps, Modal } from 'antd';
 import { theme } from 'antd';
 import { FaArrowRightFromBracket, FaRegUser } from 'react-icons/fa6';
-import { useRouter } from 'next/router';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { ROLE } from '@/constants';
 import { resetCredential } from '@/store/features/authSlice';
@@ -23,14 +22,13 @@ const Header: React.FC<Props> = (props) => {
     },
   } = theme.useToken();
   const [modal, contextHolder] = Modal.useModal()
-  const router = useRouter()
   const { username, role } = useAppSelector(state => state.auth.credential)
   const dispatch = useAppDispatch()
 
   const signout = useCallback(async () => {
     try {
       await dispatch(resetCredential())
-      await router.replace('/auth/login')
+      location.replace(`/api/auth/logout`)
     } catch (error) {
       if (error instanceof Error) {
         modal.error({
@@ -43,7 +41,7 @@ const Header: React.FC<Props> = (props) => {
         console.error(error)
       }
     }
-  }, [dispatch, router, modal])
+  }, [dispatch, modal])
 
   const items: MenuProps['items'] = [
     {
