@@ -3,4 +3,5 @@
   title: '{{menu_name}}',
   label: '{{menu_name}}',
   icon: '',
+  pathname: '/{{file_dir}}'
 },
