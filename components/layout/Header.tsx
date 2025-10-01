@@ -90,9 +90,9 @@ const Header: React.FC<Props> = (props) => {
       >
         <div>
           <Avatar
-            src='https://cdn.discordapp.com/attachments/1389220551616368784/1420377799293931652/Sticker_PPG_20_The_Herta_04.png?ex=68db1c28&is=68d9caa8&hm=7f37d7cbd9fe40e414c3e613a70f2ff47bf77b7b9f9d987eb032e171cb8702f2'
+            src='/image/profile-img.png'
             style={{
-              backgroundColor: '#fde3cf'
+              backgroundColor: '#99a1af'
             }}
           />
           <div>
