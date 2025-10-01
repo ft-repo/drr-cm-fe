@@ -32,8 +32,8 @@ const developer: CustomMenuProps['items'] = [
   },
   {
     key: '3',
-    title: 'การสร้าง REDUX',
-    label: 'การสร้าง REDUX',
+    title: 'การสร้าง Redux',
+    label: 'การสร้าง Redux',
     icon: 'FaDatabase',
     pathname: '/developer/redux'
   },

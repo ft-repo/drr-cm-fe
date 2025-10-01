@@ -54,6 +54,7 @@ const Side: React.FC<Props> = (props) => {
   const { } = props
   const { role } = useAppSelector(state => state.auth.credential)
   const router = useRouter()
+  const currentTab = menu[role]?.find(item => item.pathname === router.pathname)
 
   const Icon = useCallback((iconName: any, { ...props }) => {
     const IconResult = ICON_LIST[iconName]
@@ -62,6 +63,7 @@ const Side: React.FC<Props> = (props) => {
     }
     return
   }, [])
+
 
   const renderMenu = useMemo(() => {
     if (!menu[role as keyof typeof menu]) return []
@@ -97,7 +99,7 @@ const Side: React.FC<Props> = (props) => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={['1']}
+          defaultSelectedKeys={[currentTab?.key || '1']}
           items={renderMenu}
         />
       </main>

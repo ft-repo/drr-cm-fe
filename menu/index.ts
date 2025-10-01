@@ -6,7 +6,6 @@ const menu = {
   "USER": user,
   "ADMIN": admin,
   "DEVELOPER": developer,
-
 }
 
 export default menu

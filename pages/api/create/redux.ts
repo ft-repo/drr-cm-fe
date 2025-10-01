@@ -7,21 +7,21 @@ export default function handler(
 ) {
   try {
     // SAVE FILE
-    const { name } = req.body
+    const { name: main_name } = req.body
     let template = fs.readFileSync('template/redux.txt').toString()
-    template = template.replace(/{{name}}/g, name)
-    const savePath = `store/features/${name}Slice.ts`
+    template = template.replace(/{{name}}/g, main_name)
+    const savePath = `store/features/${main_name}Slice.ts`
     fs.writeFileSync(savePath, template)
 
     // UPDATE LIB INDEX
     let lib_index = fs.readFileSync('lib/store.ts').toString()
-    lib_index = lib_index.replace(/\/\/ {{import}}/g, `\t${name},\n// {{import}}`)
-    lib_index = lib_index.replace(/\/\/ {{export}}/g, `\t${name}: ${name},\n// {{export}}`)
+    lib_index = lib_index.replace(/\/\/ {{import}}/g, `\t${main_name},\n// {{import}}`)
+    lib_index = lib_index.replace(/\/\/ {{export}}/g, `\t${main_name}: ${main_name},\n// {{export}}`)
     fs.writeFileSync('lib/store.ts', lib_index)
 
     // UPDATE INDEX
     let export_index = fs.readFileSync('store/index.ts').toString()
-    export_index = export_index.replace(/\/\/ {{export}}/g, `export { default as ${name} } from './features/${name}Slice'\n// {{export}}`)
+    export_index = export_index.replace(/\/\/ {{export}}/g, `export { default as ${main_name} } from './features/${main_name}Slice'\n// {{export}}`)
     fs.writeFileSync('store/index.ts', export_index)
 
     res.status(200).json({
