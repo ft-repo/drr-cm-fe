@@ -44,6 +44,7 @@ const developer: CustomMenuProps['items'] = [
     icon: 'FaPlug',
     pathname: '/developer/service'
   },
+  // {{menu_template}}
 ]
 
 export default developer

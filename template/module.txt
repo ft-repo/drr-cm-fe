@@ -1,5 +1,5 @@
 import React from 'react'
-import { } from '../components'
+import { Sample } from '../components'
 
 interface Props {
 
@@ -9,7 +9,9 @@ const {{module_name}}Screen: React.FC<Props> = (props) => {
   const { } = props
 
   return (
-    <div>index</div>
+    <div>
+      <Sample />
+    </div>
   )
 }
 

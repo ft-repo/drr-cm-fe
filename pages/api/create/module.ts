@@ -20,8 +20,12 @@ export default function handler(
     let template = fs.readFileSync('template/module.txt').toString()
     template = template.replace(/{{module_name}}/g, main_name.charAt(0).toUpperCase() + main_name.slice(1))
     fs.writeFileSync(`${dir}/index.tsx`, template)
-    // WRITE COMPONENTS
-    fs.writeFileSync(`${componentDir}/index.ts`, '')
+    // WRITE INDEX
+    const component_index = fs.readFileSync('template/component_index.txt').toString()
+    fs.writeFileSync(`${componentDir}/index.ts`, component_index)
+    // WRITE COMPONENT
+    const component_file = fs.readFileSync('template/component_file.txt').toString()
+    fs.writeFileSync(`${componentDir}/Sample.tsx`, component_file)
     // RETURN RESPONSE
     res.status(200).json({
       success: true,

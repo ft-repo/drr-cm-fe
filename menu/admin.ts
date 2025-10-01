@@ -61,6 +61,7 @@ const admin: MenuProps['items'] = [
     label: 'WIM',
     icon: 'FaTruckFast',
   },
+  // {{menu_template}}
 ]
 
 export default admin
