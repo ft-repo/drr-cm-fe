@@ -8,14 +8,14 @@ export default function handler(
 ) {
   try {
     // SAVE FILE
-    const { main_name, sub_name, role, has_sub } = req.body
+    const { main_name, sub_name, role } = req.body
     // CREATE HIERACHY
     const root = process.cwd()
     const dir = path.join(root, 'features', role, main_name, sub_name, 'screen')
     const componentDir = path.join(root, 'features', role, main_name, sub_name, 'components')
     // MAKE DIR
-    fs.mkdirSync(dir, { recursive: has_sub ? true : false })
-    fs.mkdirSync(componentDir, { recursive: has_sub ? true : false })
+    fs.mkdirSync(dir, { recursive: true })
+    fs.mkdirSync(componentDir, { recursive: true })
     // READ AND WRITE INDEX
     let template = fs.readFileSync('template/module.txt').toString()
     template = template.replace(/{{module_name}}/g, main_name.charAt(0).toUpperCase() + main_name.slice(1))
