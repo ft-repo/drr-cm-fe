@@ -25,7 +25,7 @@ export default function handler(
     // RETURN RESPONSE
     res.status(200).json({
       success: true,
-      response: 'Page create successfully!'
+      response: 'Module create successfully!'
     })
   } catch (error) {
     console.log(error)

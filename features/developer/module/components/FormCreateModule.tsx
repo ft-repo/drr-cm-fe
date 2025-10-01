@@ -58,7 +58,7 @@ const FormCreateModule: React.FC<Props> = (props) => {
       } else {
         modal.error({
           title: 'ผิดพลาด',
-          content: response.response,
+          content: response.response || 'Internal Server Error',
           okText: 'ยืนยัน',
           onOk: () => Modal.destroyAll()
         })
@@ -67,7 +67,7 @@ const FormCreateModule: React.FC<Props> = (props) => {
       if (error instanceof Error) {
         modal.error({
           title: 'ผิดพลาด',
-          content: error.message,
+          content: error.message || 'Internal Server Error',
           okText: 'ยืนยัน',
           onOk: () => Modal.destroyAll()
         })
