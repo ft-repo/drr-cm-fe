@@ -44,13 +44,6 @@ const developer: CustomMenuProps['items'] = [
     icon: 'FaPlug',
     pathname: '/developer/service'
   },
-  {
-    key: '5',
-    title: 'เพิ่มรูปภาพ',
-    label: 'เพิ่มรูปภาพ',
-    icon: 'FaImage',
-    pathname: '/developer/image'
-  },
   // {{menu_template}}
 ]
 
