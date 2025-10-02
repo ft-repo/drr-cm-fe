@@ -37,7 +37,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => (async (co
     credential: {
       username: session.username,
       role: session.role,
-      access_token: session.access_token
+      access_token: session.access_token,
+      is_logged_in: session.isLoggedIn
     }
   }));
 
@@ -45,7 +46,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => (async (co
     credential: {
       username: session.username,
       role: session.role,
-      access_token: session.access_token
+      access_token: session.access_token,
+      is_logged_in: session.isLoggedIn
     }
   })
 }) satisfies GetServerSideProps<PageProps | Redirect>);

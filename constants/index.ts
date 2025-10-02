@@ -18,3 +18,9 @@ export const AUTH = {
     access_token: "DEVELOPER1234",
   },
 }
+
+export const DEFAULT_PATH = {
+  "USER": "/user/home",
+  "ADMIN": "/admin/dashboard",
+  "DEVELOPER": "/developer/page"
+}

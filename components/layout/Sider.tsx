@@ -5,6 +5,7 @@ import Image from 'next/image';
 import DPT_LOGO from '@/public/image/dpt-logo.png'
 import {
   // USER
+  FaHouse,
   // --- PUT ICON HERE
   // ADMIN
   FaGrip,
@@ -31,6 +32,7 @@ interface Props {
 
 const ICON_LIST: any = {
   // USER
+  FaHouse,
   // --- PUT ICON HERE
   // ADMIN
   FaGrip,

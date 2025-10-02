@@ -4,6 +4,7 @@ export type Credential = {
   username: string;
   role: string;
   access_token: string;
+  is_logged_in: boolean;
 }
 
 export type AuthState = {
@@ -14,7 +15,8 @@ const initialState: AuthState = {
   credential: {
     username: '',
     role: '',
-    access_token: ''
+    access_token: '',
+    is_logged_in: false
   }
 }
 

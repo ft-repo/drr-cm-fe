@@ -7,6 +7,7 @@ import DPT_LOGO from '@/public/image/dpt-logo.png'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { setCredential } from '@/store/features/authSlice';
 import { setLoading } from '@/store/features/layoutSlice';
+import { DEFAULT_PATH } from '@/constants';
 
 interface Props {
 
@@ -52,7 +53,8 @@ const FormLogin: React.FC<Props> = (props) => {
           credential: {
             username: response.response.username,
             role: response.response.role,
-            access_token: response.response.access_token
+            access_token: response.response.access_token,
+            is_logged_in: response.response.isLoggedIn
           }
         }))
         // RETURN SUCCESS
@@ -60,7 +62,7 @@ const FormLogin: React.FC<Props> = (props) => {
           title: 'เข้าสู่ระบบสำเร็จ',
           content: `ชื่อผู้ใช้งาน: ${value.username}`,
           okText: 'ยืนยัน',
-          onOk: () => router.replace('/user/test')
+          onOk: () => router.replace(DEFAULT_PATH[response.response.role as keyof typeof DEFAULT_PATH])
         })
       } else {
         modal.error({

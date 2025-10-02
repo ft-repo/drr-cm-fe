@@ -16,6 +16,13 @@ interface CustomMenuProps extends Omit<MenuProps, 'items'> {
 }
 
 const user: CustomMenuProps['items'] = [
+  {
+    key: '1',
+    title: 'หน้าหลัก',
+    label: 'หน้าหลัก',
+    icon: 'FaHouse',
+    pathname: '/user/home'
+  },
   // {{menu_template}}
 ]
 

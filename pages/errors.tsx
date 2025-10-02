@@ -18,7 +18,7 @@ const ErrorPage: React.FC<Props> = (props) => {
     modal.error({
       title: 'ไม่สามารถเข้าถึงข้อมูลได้',
       content: 'ไม่สามารถเข้าสู่ระบบได้ กรุณาเข้าสู่ระบบ',
-      onOk: () => window.location.replace('/auth/login'),
+      onOk: () => location.replace('/api/auth/logout'),
       okText: 'เข้าสู่ระบบ'
     })
   }, [modal])

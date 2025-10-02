@@ -86,6 +86,13 @@ const admin: CustomMenuProps['items'] = [
     icon: 'FaTruckFast',
     pathname: '',
   },
+  {
+  key: '',
+  title: 'dashboard',
+  label: 'dashboard',
+  icon: '',
+  pathname: '/admin/dashboard'
+},
   // {{menu_template}}
 ]
 
