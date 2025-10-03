@@ -24,6 +24,7 @@ export default function handler(
     export_index = export_index.replace(/\/\/ {{export}}/g, `export { default as ${main_name} } from './features/${main_name}Slice'\n// {{export}}`)
     fs.writeFileSync('store/index.ts', export_index)
 
+    // RETURN RESPONSE
     res.status(200).json({
       success: true,
       response: 'Store create successfully!'
